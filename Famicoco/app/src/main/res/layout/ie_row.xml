@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp"
+    android:padding="7dp">
+
+    <!--<ImageView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="45dp"-->
+        <!--android:background="@drawable/ballon_talk"-->
+        <!--android:paddingLeft="20dp"/>-->
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/ie2_textView" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ballon_talk"
+        android:id="@+id/ie_ballon_imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@color/White"
+        android:id="@+id/ie2_icon" />
+
+    <TextView
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ie2_textView2"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/ie_ballon_imageView2"
+        android:layout_marginStart="14dp" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_now"
+        android:layout_alignBottom="@+id/ie_ballon_imageView2"
+        android:layout_toStartOf="@+id/ie_ballon_imageView2" />
+
+</RelativeLayout>

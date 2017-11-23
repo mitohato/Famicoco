@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    tools:context="com.example.mito.famicoco.SOTOFragment"
+    android:id="@+id/sotococo_fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ListView
+        android:scrollbars="none"
+        android:layout_width="wrap_content"
+        android:layout_height="445dp"
+        android:id="@+id/soto_listview"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"/>
+
+</RelativeLayout>

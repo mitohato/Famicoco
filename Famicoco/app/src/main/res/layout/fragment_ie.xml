@@ -1,0 +1,107 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout_ie"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="com.example.mito.famicoco.IEFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/SubColor"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ie_imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:id="@+id/ie_imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/ie_imageView3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/ie_imageView4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/ie_imageView5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/ie_imageView6"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <com.example.mito.famicoco.CustomListView
+        android:id="@+id/ie_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout"
+        android:layout_below="@+id/linearLayout2"
+        android:divider="@null"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="45dp"
+        android:background="@color/SubColor"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:background="@drawable/frame_style_edit"
+            android:hint="@string/talk_hint"
+            android:inputType="text"
+            android:maxLength="15"
+            android:paddingLeft="5dp"
+            android:paddingRight="20dp"
+            android:paddingStart="13dp"
+            android:textColorHint="@color/Gray"
+            android:textCursorDrawable="@color/Black"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="0.16"
+            android:background="@drawable/frame_style_button"
+            android:text="送る"
+            android:textColor="@color/SubColor"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="7dp">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@color/Black"
+        android:id="@+id/ie2_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ie2_icon"
+        android:id="@+id/ie2_textView" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ballon_talk2"
+        android:layout_below="@+id/ie2_textView"
+        android:layout_toEndOf="@+id/ie2_icon"
+        android:id="@+id/ie_ballon_imageView2" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ie2_icon"
+        android:id="@+id/ie2_textView2"
+        android:layout_marginEnd="7dp"
+        android:layout_alignEnd="@+id/ie_ballon_imageView2" />
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/time_now"
+        android:layout_alignBottom="@+id/ie_ballon_imageView2"
+        android:layout_toEndOf="@+id/ie_ballon_imageView2" />
+
+</RelativeLayout>

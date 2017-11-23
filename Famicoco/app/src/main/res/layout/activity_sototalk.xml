@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mito.famicoco.SOTOTalkActivity"
+    android:background="@color/White"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/SubColor"
+        android:id="@+id/linearLayout2"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView"
+            android:layout_marginStart="10dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView2"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView3"
+            android:layout_marginLeft="10dp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView4"
+            android:layout_marginLeft="10dp" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView5"
+            android:layout_marginLeft="10dp"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ie_imageView6"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+    <com.example.mito.famicoco.CustomListView
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/soto_talk_listview"
+        android:layout_above="@+id/linearLayout_soto"
+        android:layout_below="@+id/linearLayout2" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/linearLayout_soto"
+        android:paddingLeft="5dp"
+        android:background="@color/SubColor"
+        android:weightSum="1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center">
+
+        <EditText
+            android:paddingStart="13dp"
+            android:layout_width="280dp"
+            android:layout_height="30dp"
+            android:id="@+id/soto_editText"
+            android:background="@drawable/frame_style_edit"
+            android:paddingRight="20dp"
+            android:inputType="text"
+            android:maxLength="15"
+            android:textCursorDrawable="@color/Black"
+            android:hint="@string/talk_hint"
+            android:textColorHint="@color/Gray"
+            android:paddingLeft="5dp" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="30dp"
+            android:id="@+id/button"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/frame_style_button"
+            android:layout_weight="0.16"
+            android:text="送る"
+            android:textColor="@color/SubColor"/>
+    </LinearLayout>
+
+</RelativeLayout>

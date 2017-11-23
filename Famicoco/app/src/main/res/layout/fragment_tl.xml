@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    tools:context="com.example.mito.famicoco.TLFragment">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="45dp"
+        android:id="@+id/swipe_tl">
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:scrollbars="none"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="45dp"
+        android:id="@+id/list"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

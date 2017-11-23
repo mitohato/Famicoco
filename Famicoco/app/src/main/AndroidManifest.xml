@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mito.famicoco">
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.example.mito.famicoco.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.mito.famicoco.SOTOTalkActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- [START firebase_service] -->
+        <service android:name="com.example.mito.famicoco.MyFireBaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- [END firebase_service] -->
+
+
+        <!-- [START firebase_iid_service] -->
+        <service android:name="com.example.mito.famicoco.MyFireBaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- [END firebase_iid_service] -->
+        <activity
+            android:name="com.example.mito.famicoco.UserNameSettingActivity"
+            android:label="@string/title_activity_setting"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mito.famicoco.InitStartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mito.famicoco.PetSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.example.mito.famicoco.NotificationActivity" />
+        <!-- <activity android:name=".MainActivity" -->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"/> -->
+        <activity android:name="com.example.mito.famicoco.ShowDiaLog"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleInstance"/>
+    </application>
+
+</manifest>

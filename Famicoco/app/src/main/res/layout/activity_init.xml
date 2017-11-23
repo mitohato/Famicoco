@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_icon_setting"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.mito.famicoco.InitStartActivity">
+
+    <EditText
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/name_init_setting"
+        android:inputType="text"
+        android:hint="名前を入力してください"
+        android:layout_marginTop="68dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="開始"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_setting"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="54dp" />
+
+    <TextView
+        android:id="@+id/registrationID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ユーザーID"
+        android:textColor="@color/MainColor"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/button_setting"/>
+
+    <TextView
+        android:id="@+id/beaconID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/registrationID"
+        android:layout_below="@+id/registrationID"
+        android:layout_marginTop="31dp"
+        android:text="ビーコンID"
+        android:textColor="@color/MainColor"/>
+
+    <TextView
+        android:id="@+id/getRegistrationID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/registrationID"
+        android:layout_toEndOf="@+id/button_setting"
+        android:text="wait..."
+        android:textColor="@color/Gray"/>
+
+    <TextView
+        android:id="@+id/getBeaconID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/beaconID"
+        android:text="wait..."
+        android:textColor="@color/Gray"
+        android:layout_alignStart="@+id/getRegistrationID"
+        android:layout_alignEnd="@+id/getRegistrationID"/>
+
+</RelativeLayout>

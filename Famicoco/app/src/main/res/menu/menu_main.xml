@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.mito.famicoco.MainActivity">
+
+    <!--<item-->
+        <!--android:id="@+id/username_setting"-->
+        <!--android:title="@string/user_name"/>-->
+    <!--<item-->
+        <!--android:id="@+id/usericon_setting"-->
+        <!--android:title="@string/icon_setting"/>-->
+    <item
+        android:id="@+id/notification_setting"
+        android:title="@string/notification_setting"/>
+    <item
+        android:id="@+id/pet_setting"
+        android:title="@string/pet_function"/>
+
+</menu>
