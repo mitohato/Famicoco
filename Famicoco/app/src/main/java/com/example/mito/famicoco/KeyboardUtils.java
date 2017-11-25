@@ -14,6 +14,7 @@ class KeyboardUtils {        //キーボードの出し入れをするクラス
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(
                     Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             view.clearFocus();
         }
@@ -38,6 +39,7 @@ class KeyboardUtils {        //キーボードの出し入れをするクラス
                 if (context != null) {
                     InputMethodManager imm = (InputMethodManager) context
                             .getSystemService(Context.INPUT_METHOD_SERVICE);
+                    assert imm != null;
                     imm.showSoftInput(edit, InputMethodManager.SHOW_IMPLICIT);
                 }
             }

@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 import static com.example.mito.famicoco.MainActivity.ServerUrl;
 import static com.example.mito.famicoco.MainActivity.myBeaconMacAddress;
 import static com.example.mito.famicoco.MainActivity.myName;
-import static com.example.mito.famicoco.MainActivity.myRegistarationId;
+import static com.example.mito.famicoco.MainActivity.myRegistrationId;
 
 public class InitStartActivity extends AppCompatActivity {
     @BindView(R.id.name_init_setting)
@@ -50,6 +51,7 @@ public class InitStartActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mHandler.post(new Runnable() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
                         // 実行したい処理
@@ -58,7 +60,7 @@ public class InitStartActivity extends AppCompatActivity {
                             getBeaconID.setTextColor(getResources().getColor(R.color.Red));
                             isGetID[0] = true;
                         }
-                        if (!myRegistarationId.equals("")) {
+                        if (!myRegistrationId.equals("")) {
                             getRegistrationID.setText("OK");
                             getRegistrationID.setTextColor(getResources().getColor(R.color.Red));
                             isGetID[1] = true;
@@ -90,11 +92,11 @@ public class InitStartActivity extends AppCompatActivity {
                     myName = name;
 
                     SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    sp.edit().putString("name", name).commit();
+                    sp.edit().putString("name", name).apply();
 
                     try {
                         name = URLEncoder.encode(name, "UTF-8");
-                        String urlString = ServerUrl + "init_famicoco/" + "?user_name=" + name + "&regi_id=" + myRegistarationId + "&beacon_id=" + myBeaconMacAddress;
+                        String urlString = ServerUrl + "init_famicoco/" + "?user_name=" + name + "&regi_id=" + myRegistrationId + "&beacon_id=" + myBeaconMacAddress;
                         URL url = new URL(urlString);
                         new HttpGetTask().execute(url);
                     } catch (MalformedURLException | UnsupportedEncodingException e) {

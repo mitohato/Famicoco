@@ -11,9 +11,6 @@ import java.util.List;
 import static com.example.mito.famicoco.MainActivity.myBeaconMacAddress;
 import static com.google.android.gms.internal.zzs.TAG;
 
-/**
- * Created by mito on 2016/09/13.
- */
 class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時に呼ばれる
 
     static ArrayList<String> beaconId = new ArrayList<>();
@@ -37,6 +34,7 @@ class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時
         // 通常はこちらが呼び出されます。
         // beaconを検知したらここが呼ばれるみたいだからこの後に処理書けば良さげ
         ScanRecord mScanRecord = result.getScanRecord();
+        assert mScanRecord != null;
         byte[] recordByte = mScanRecord.getBytes();
         if (getUUID(recordByte).equals("E4B404EA-E791-4FBB-B854-3163E3551D9B")) {
             if (f_init) {
@@ -76,7 +74,7 @@ class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時
     }
 
     private String getUUID(byte[] scanRecord) {
-        String uuid = IntToHex2(scanRecord[9] & 0xff)
+        return IntToHex2(scanRecord[9] & 0xff)
                 + IntToHex2(scanRecord[10] & 0xff)
                 + IntToHex2(scanRecord[11] & 0xff)
                 + IntToHex2(scanRecord[12] & 0xff)
@@ -96,7 +94,6 @@ class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時
                 + IntToHex2(scanRecord[22] & 0xff)
                 + IntToHex2(scanRecord[23] & 0xff)
                 + IntToHex2(scanRecord[24] & 0xff);
-        return uuid;
     }
 
     private String getMinor(byte[] scanRecord) {

@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String ServerUrl = "SERVERURL";
     public static String myName = "";
     public static Bitmap tlIcon[] = new Bitmap[6];
-    public static String myRegistarationId = "";
+    public static String myRegistrationId = "";
     private Handler mHandler = null;
     public static HashMap<String, Bitmap> selectIcon_map = null;
     public static HashMap<String, Integer> selectIcon_map_id = null;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         final BluetoothManager bManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        assert bManager != null;
         final BluetoothAdapter bluetoothAdapter = bManager.getAdapter();
 
         setTitle(getString(R.string.tl));
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         int[] drawableId = new int[]{R.drawable.tab1_selector, R.drawable.tab2_selector, R.drawable.tab3_selector, R.drawable.tab4_selector};
         for (int i = 0; i < 4; i++) {
             tab = tabLayout.getTabAt(i);
+            assert tab != null;
             tab.setIcon(drawableId[i]);
         }
 
@@ -156,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         while (!bluetoothAdapter.isEnabled()) ;
 
-        // BLEScan開始 not estimote sdk
+        // BLEScan開始 not Estimote sdk
         mBluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
         mScanCallback = new IBeaconScanCallback();
         mBluetoothLeScanner.startScan(mScanCallback);
@@ -187,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         // 実行したい処理
-                        AsyncTask<URL, Void, Boolean> asyncTask = new AsyncTask<URL, Void, Boolean>() {
+                        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, Boolean> asyncTask = new AsyncTask<URL, Void, Boolean>() {
                             @Override
                             protected Boolean doInBackground(URL... urls) {
                                 final URL url = urls[0];
@@ -225,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        AsyncTask<URL, Void, Boolean> task = new AsyncTask<URL, Void, Boolean>() {
+                        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, Boolean> task = new AsyncTask<URL, Void, Boolean>() {
                             @Override
                             protected Boolean doInBackground(URL... urls) {
                                 final URL url = urls[0];

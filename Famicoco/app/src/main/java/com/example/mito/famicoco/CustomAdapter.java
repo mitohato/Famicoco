@@ -1,6 +1,7 @@
 package com.example.mito.famicoco;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +20,15 @@ class CustomAdapter extends ArrayAdapter<CustomData> {  //リストに表示す�
                 Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.tl_row, parent, false);
         }
 
         CustomData customData = getItem(position);
+        assert customData != null;
         ((ImageView) convertView.findViewById(R.id.icon))
                 .setImageBitmap(customData.getIcon());
         ((TextView) convertView.findViewById(R.id.time_now))

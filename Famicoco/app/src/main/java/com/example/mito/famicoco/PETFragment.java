@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -64,7 +65,7 @@ public class PETFragment extends Fragment implements SwipeRefreshLayout.OnRefres
     }
 
     public void UpData() {
-        AsyncTask<URL, Void, ArrayList<String>> task = new AsyncTask<URL, Void, ArrayList<String>>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, ArrayList<String>> task = new AsyncTask<URL, Void, ArrayList<String>>() {
             @Override
             protected ArrayList<String> doInBackground(URL... values) {
                 HttpURLConnection con = null;

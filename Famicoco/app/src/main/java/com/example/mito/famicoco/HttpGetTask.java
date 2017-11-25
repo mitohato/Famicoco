@@ -1,15 +1,7 @@
 package com.example.mito.famicoco;
 
-/**
- * Created by mi151307 on 2016/09/07.
- */
-
 import android.os.AsyncTask;
 import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -28,19 +20,11 @@ final class HttpGetTask extends AsyncTask<URL, Void, Boolean> {
             // アクセス先URL
             final URL url = values[0];
             // 出力ファイルフルパス
-            //final String filePath = "/xxxx/xxxx/xxxx/filename.xxx";
 
             // ローカル処理
             // コネクション取得
             con = (HttpURLConnection) url.openConnection();
             con.connect();
-            InputStream in = con.getInputStream();
-            String readSt = readInputStream(in);
-
-
-            JSONObject jsonData = new JSONObject(readSt).getJSONObject("オブジェクト名");
-            // 配列を取得する場合
-            JSONArray jsonArray = new JSONObject(readSt).getJSONArray("オブジェクト名");
 
             // HTTPレスポンスコード
             final int status = con.getResponseCode();
@@ -55,7 +39,6 @@ final class HttpGetTask extends AsyncTask<URL, Void, Boolean> {
                 //final FileOutputStream fileOutput = new FileOutputStream(filePath);
                 //final DataOutputStream dataOut = new DataOutputStream(fileOutput);
                 // 読み込みデータ単位
-                final byte[] buffer = new byte[4096];
                 // 読み込んだデータを一時的に格納しておく変数
 //                int readByte = 0;
 
@@ -72,7 +55,7 @@ final class HttpGetTask extends AsyncTask<URL, Void, Boolean> {
                 return true;
             }
 
-        } catch (IOException | JSONException e1) {
+        } catch (IOException e1) {
             e1.printStackTrace();
         } finally {
             if (con != null) {
@@ -84,7 +67,7 @@ final class HttpGetTask extends AsyncTask<URL, Void, Boolean> {
     }
 
     static String readInputStream(InputStream in) throws IOException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String st;
 
         BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));

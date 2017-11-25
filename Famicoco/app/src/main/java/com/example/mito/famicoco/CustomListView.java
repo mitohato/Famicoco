@@ -5,17 +5,13 @@ import android.util.AttributeSet;
 import android.widget.ListView;
 
 /**
- * Created by mito on 2016/10/24.
- */
-
-/**
  * @author talkKey
  */
 
 public class CustomListView extends ListView {
     //ActivityまたはFragmentが実装するインターフェース
     public interface OnKeyboardAppearedListener {
-        public void onKeyboardAppeared(boolean isChange);
+        void onKeyboardAppeared();
     }
 
     private OnKeyboardAppearedListener listener;
@@ -42,13 +38,13 @@ public class CustomListView extends ListView {
 
     //Viewのサイズが変化した時に呼ばれるメソッド
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldWidth, int oldHeight) {
+        super.onSizeChanged(w, h, oldWidth, oldHeight);
 
         //キーボード出現時（Viewのサイズが小さくなった場合）のみ
-        if (h < oldh) {
+        if (h < oldHeight) {
             //インターフェースを実装したリスナー（Activity、Fragment）のメソッドを呼ぶ
-            listener.onKeyboardAppeared(true);
+            listener.onKeyboardAppeared();
         }
     }
 }

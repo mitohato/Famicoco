@@ -1,14 +1,12 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-/**
- * Created by mito on 2016/09/01.
- */
 class CustomData {       //カスタムデータをセットするためのクラス
     private Bitmap icon;
     private String name;
@@ -20,7 +18,7 @@ class CustomData {       //カスタムデータをセットするためのク�
     }
 
     void setTime() {
-        final DateFormat df = new SimpleDateFormat("HH:mm");
+        @SuppressLint("SimpleDateFormat") final DateFormat df = new SimpleDateFormat("HH:mm");
         final Date date = new Date(System.currentTimeMillis());
         this.time_now = df.format(date);
     }

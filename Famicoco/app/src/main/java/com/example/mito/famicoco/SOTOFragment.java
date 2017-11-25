@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,11 +55,11 @@ public class SOTOFragment extends Fragment {     //そとここ用のクラス
         super.onActivityCreated(bundle);
         setHasOptionsMenu(true);
         //そとここにセットするリスト用意
-        list = new ArrayList<HashMap<String, Object>>();
+        list = new ArrayList<>();
 
         //準備
         adapter = new SimpleAdapter(getActivity(), list, R.layout.soto_row,
-                new String[]{"iconkey0", "iconkey1", "iconkey2", "iconkey3"},
+                new String[]{"iconKey0", "iconKey1", "iconKey2", "iconKey3"},
                 new int[]{R.id.icon1, R.id.icon2, R.id.icon3, R.id.icon4});
 
         iconId = new int[]{R.drawable.haruka, R.drawable.riku, R.drawable.father, R.drawable.mother, R.drawable.grandfather};
@@ -88,7 +89,7 @@ public class SOTOFragment extends Fragment {     //そとここ用のクラス
                     public void run() {
                         // 実行したい処理
 
-                        AsyncTask<URL, Void, JSONArray> task = new AsyncTask<URL, Void, JSONArray>() {
+                        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, JSONArray> task = new AsyncTask<URL, Void, JSONArray>() {
                             @Override
                             protected JSONArray doInBackground(URL... urls) {
                                 HttpURLConnection con;
@@ -120,7 +121,7 @@ public class SOTOFragment extends Fragment {     //そとここ用のクラス
                                     for (int i = 1; i < m; i++) {
                                         JSONArray data = array.getJSONArray(i);
                                         int n = data.length();
-                                        HashMap<String, Object> item = new HashMap<String, Object>();
+                                        HashMap<String, Object> item = new HashMap<>();
                                         for (int j = 0; j < n; j++) {
                                             int num = 0;
                                             String usr = data.getString(j);

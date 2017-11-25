@@ -82,10 +82,11 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 //        String text = String.valueOf(data.get("body"));
 //        String title = String.valueOf(data.get("title"));
         //nemuが書いた。
-        //Map<String, String> datas = remoteMessage.getData();
+        //Map<String, String> data = remoteMessage.getData();
 //        String ContentId = (String) data.get("nemu");
 //        Log.d(TAG, "onMessageReceived id: " + ContentId);
         Log.d("im", "here");
+        assert notificationManager != null;
         notificationManager.notify(1, createNotification(true));
 //        Intent intent = new Intent(getApplicationContext(), ShowDiaLog.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -121,6 +122,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        assert notificationManager != null;
         notificationManager.notify(1 /* ID of notification */, notificationBuilder.build());
     }
 

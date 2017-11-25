@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -74,7 +75,7 @@ public class TLFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
     }
 
     public void UpData() {
-        AsyncTask<URL, Void, ArrayList<TLUpdateItem>> task = new AsyncTask<URL, Void, ArrayList<TLUpdateItem>>() {
+        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, ArrayList<TLUpdateItem>> task = new AsyncTask<URL, Void, ArrayList<TLUpdateItem>>() {
             @Override
             protected ArrayList<TLUpdateItem> doInBackground(URL... values) {
                 HttpURLConnection con = null;
@@ -90,7 +91,7 @@ public class TLFragment extends Fragment implements SwipeRefreshLayout.OnRefresh
                     con.connect();
                     InputStream in = con.getInputStream();
                     String readSt = HttpGetTask.readInputStream(in);
-                    Log.d("readst", readSt);
+                    Log.d("readString", readSt);
 
                     //// 配列を取得する場合
                     JSONArray jsonArray = new JSONArray(readSt);

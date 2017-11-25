@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -59,9 +60,9 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
     private Handler mHandler = null;
     private ArrayList<CustomData> list;
     private TalkCustomAdapter adapter;
-    private int pos = 0;
-    private String data, str;
-    private JSONArray array, select, tmp;
+    private String str;
+    private JSONArray select;
+    private JSONArray tmp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +72,8 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
         setTitle("そとここ");
 
         Intent i = getIntent();
-        data = i.getStringExtra("list");
-        pos = i.getIntExtra("select", 0) + 1;
+        String data = i.getStringExtra("list");
+        int pos = i.getIntExtra("select", 0) + 1;
 
         list = new ArrayList<>();
         listView.setListener(this);
@@ -84,7 +85,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
         imageView5.setImageResource(R.color.SubColor);
         imageView6.setImageResource(R.color.SubColor);
         try {
-            array = new JSONArray(data);
+            JSONArray array = new JSONArray(data);
             select = array.getJSONArray(pos);
             int m = select.length();
             for (int j = 0; j < m; j++) {
@@ -103,6 +104,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
 
         //戻るボタン表示
         android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+        assert actionbar != null;
         actionbar.setHomeButtonEnabled(true);
         actionbar.setDisplayHomeAsUpEnabled(true);
 
@@ -114,7 +116,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
                 str = editText.getText().toString();
                 CustomData item = new CustomData();
                 if (!str.equals("")) {
-                    AsyncTask<URL, Void, Boolean> task = new AsyncTask<URL, Void, Boolean>() {
+                    @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, Boolean> task = new AsyncTask<URL, Void, Boolean>() {
                         @Override
                         protected Boolean doInBackground(URL... urls) {
                             final URL url = urls[0];
@@ -175,10 +177,10 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
     }
 
     @Override
-    public void onKeyboardAppeared(boolean isChange) {
+    public void onKeyboardAppeared() {
 
         //ListView生成済、且つサイズ変更した（キーボードが出現した）場合
-        if (isChange) {
+//        if (isChange) {
 
             //リストアイテムの総数-1（0番目から始まって最後のアイテム）にスクロールさせる
             Handler handler = new Handler();
@@ -191,7 +193,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
             };
             handler.postDelayed(runnable, 500);
 
-        }
+//        }
     }
 
     @Override
@@ -206,7 +208,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
                     @Override
                     public void run() {
                         // 実行したい処理
-                        AsyncTask<URL, Void, ArrayList<UpdateItem>> task = new AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
+                        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, ArrayList<UpdateItem>> task = new AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
                             @Override
                             protected ArrayList<UpdateItem> doInBackground(URL... urls) {
                                 final URL url = urls[0];
@@ -261,7 +263,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
                                         list.add(0, updateItem.toCustomData());
                                         listView.setAdapter(adapter);
                                     }
-                                    onKeyboardAppeared(true);
+                                    onKeyboardAppeared();
                                 }
                             }
                         };

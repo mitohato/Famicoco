@@ -1,5 +1,6 @@
 package com.example.mito.famicoco;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -44,7 +45,7 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
     private CustomData item;
     public static Bitmap[] icon = new Bitmap[6];
     private ArrayList<CustomData> list;
-    private ArrayList<Object> ie_list = new ArrayList<Object>();
+    private ArrayList<Object> ie_list;
 
 
     @BindView(R.id.ie_listView)
@@ -87,7 +88,7 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
                     @Override
                     public void run() {
                         // 実行したい処理
-                        AsyncTask<URL, Void, ArrayList<UpdateItem>> task = new AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
+                        @SuppressLint("StaticFieldLeak") AsyncTask<URL, Void, ArrayList<UpdateItem>> task = new AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
                             @Override
                             protected ArrayList<UpdateItem> doInBackground(URL... urls) {
 
@@ -117,9 +118,7 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
                                         updateItem = new UpdateItem(talk);
                                         updateItemList.add(updateItem);
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
+                                } catch (JSONException | IOException e) {
                                     e.printStackTrace();
                                 }
                                 return updateItemList;
@@ -156,7 +155,7 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
                                         list.add(0, updateItem.toCustomData());
                                         ie_listView.setAdapter(adapter);
                                     }
-                                    onKeyboardAppeared(true);
+                                    onKeyboardAppeared();
                                 }
                             }
                         };
@@ -219,7 +218,7 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
                     list.add(item);
                     editText.setText("");
                     ie_listView.setAdapter(adapter);
-                    onKeyboardAppeared(true);
+                    onKeyboardAppeared();
                 }
                 KeyboardUtils.hide(getActivity());
             }
@@ -236,16 +235,17 @@ public class IEFragment extends Fragment implements CustomListView.OnKeyboardApp
     }
 
     public IEFragment() {
+        ie_list = new ArrayList<>();
     }
 
     @Override
-    public void onKeyboardAppeared(boolean isChange) {
+    public void onKeyboardAppeared() {
 
         //ListView生成済、且つサイズ変更した（キーボードが出現した）場合
-        if (isChange) {
+//        if (isChange) {
             //スクロールアニメーションが要らない場合はこれでOK
             ie_listView.setSelection(ie_listView.getCount() - 1);
-        }
+//        }
     }
 
     protected static Bitmap judge(Object s) {
