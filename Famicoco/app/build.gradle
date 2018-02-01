@@ -33,16 +33,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/socketio.jar')
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.google.firebase:firebase-messaging:11.8.0'
-    compile 'com.squareup.okhttp3:okhttp:3.9.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.jakewharton:butterknife:8.4.0'
-//    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation files('libs/socketio.jar')
+    implementation 'com.android.support:appcompat-v7:24.2.1'
+    implementation 'com.android.support:design:24.2.1'
+    implementation 'com.android.support:support-v4:24.2.1'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.jakewharton:butterknife:8.4.0'
 }
 // Add to the bottom of the file
 apply plugin: 'com.google.gms.google-services'
