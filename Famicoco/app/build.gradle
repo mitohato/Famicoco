@@ -7,7 +7,7 @@ tasks.withType(AbstractCompile) each { it.options.encoding = defaultEncoding }
 android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 24
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.example.mito.famicoco2"
         minSdkVersion 22
