@@ -1,39 +1,30 @@
 package com.example.mito.famicoco
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-
+import androidx.appcompat.app.AppCompatActivity
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
+import com.example.mito.famicoco.MainActivity.Companion.myName
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
-
 import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
-
-import butterknife.BindView
-import butterknife.ButterKnife
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-import okhttp3.Response
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
-import com.example.mito.famicoco.MainActivity.myName
 
 class SOTOTalkActivity : AppCompatActivity(), CustomListView.OnKeyboardAppearedListener { //そとここのリストを押したときに呼ばれるトーク画面用Activity
 

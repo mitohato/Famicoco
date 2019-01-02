@@ -7,12 +7,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-
+import com.example.mito.famicoco.MainActivity.Companion.myName
 import java.util.ArrayList
 
-import com.example.mito.famicoco.MainActivity.myName
-
-internal class TalkCustomAdapter(c: Context, id: Int, list: ArrayList<CustomData>) : ArrayAdapter<CustomData>(c, id, list) {
+internal class TalkCustomAdapter(c: Context?, id: Int, list: ArrayList<CustomData>?) : ArrayAdapter<CustomData>(c, id, list) {
     private val layoutInflater: LayoutInflater
 
 
@@ -22,7 +20,7 @@ internal class TalkCustomAdapter(c: Context, id: Int, list: ArrayList<CustomData
 
 
     init {
-        this.layoutInflater = c.getSystemService(
+        this.layoutInflater = c?.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     }

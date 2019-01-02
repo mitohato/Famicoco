@@ -1,12 +1,10 @@
 package com.example.mito.famicoco
 
 import android.bluetooth.le.ScanCallback
-import android.bluetooth.le.ScanRecord
 import android.bluetooth.le.ScanResult
-
+import com.example.mito.famicoco.MainActivity.Companion.myBeaconMacAddress
 import java.util.ArrayList
-
-import com.example.mito.famicoco.MainActivity.myBeaconMacAddress
+import kotlin.experimental.and
 
 internal class IBeaconScanCallback : ScanCallback() {      //beaconを検知した時に呼ばれる
 
@@ -53,35 +51,36 @@ internal class IBeaconScanCallback : ScanCallback() {      //beaconを検知し�
     }
 
     private fun getUUID(scanRecord: ByteArray): String {
-        return (IntToHex2(scanRecord[9] and 0xff)
-                + IntToHex2(scanRecord[10] and 0xff)
-                + IntToHex2(scanRecord[11] and 0xff)
-                + IntToHex2(scanRecord[12] and 0xff)
+        return (IntToHex2(scanRecord[9] and 0xff.toByte())
+                + IntToHex2(scanRecord[10] and 0xff.toByte())
+                + IntToHex2(scanRecord[11] and 0xff.toByte())
+                + IntToHex2(scanRecord[12] and 0xff.toByte())
                 + "-"
-                + IntToHex2(scanRecord[13] and 0xff)
-                + IntToHex2(scanRecord[14] and 0xff)
+                + IntToHex2(scanRecord[13] and 0xff.toByte())
+                + IntToHex2(scanRecord[14] and 0xff.toByte())
                 + "-"
-                + IntToHex2(scanRecord[15] and 0xff)
-                + IntToHex2(scanRecord[16] and 0xff)
+                + IntToHex2(scanRecord[15] and 0xff.toByte())
+                + IntToHex2(scanRecord[16] and 0xff.toByte())
                 + "-"
-                + IntToHex2(scanRecord[17] and 0xff)
-                + IntToHex2(scanRecord[18] and 0xff)
+                + IntToHex2(scanRecord[17] and 0xff.toByte())
+                + IntToHex2(scanRecord[18] and 0xff.toByte())
                 + "-"
-                + IntToHex2(scanRecord[19] and 0xff)
-                + IntToHex2(scanRecord[20] and 0xff)
-                + IntToHex2(scanRecord[21] and 0xff)
-                + IntToHex2(scanRecord[22] and 0xff)
-                + IntToHex2(scanRecord[23] and 0xff)
-                + IntToHex2(scanRecord[24] and 0xff))
+                + IntToHex2(scanRecord[19] and 0xff.toByte())
+                + IntToHex2(scanRecord[20] and 0xff.toByte())
+                + IntToHex2(scanRecord[21] and 0xff.toByte())
+                + IntToHex2(scanRecord[22] and 0xff.toByte())
+                + IntToHex2(scanRecord[23] and 0xff.toByte())
+                + IntToHex2(scanRecord[24] and 0xff.toByte()))
     }
 
     private fun getMinor(scanRecord: ByteArray): String {
-        val hexMinor = IntToHex2(scanRecord[27] and 0xff) + IntToHex2(scanRecord[28] and 0xff)
+        val hexMinor = IntToHex2(scanRecord[27] and 0xff.toByte()) + IntToHex2(scanRecord[28] and 0xff.toByte())
         return Integer.parseInt(hexMinor, 16).toString()
     }
 
-    private fun IntToHex2(i: Int): String {
-        val hex_2 = charArrayOf(Character.forDigit(i shr 4 and 0x0f, 16), Character.forDigit(i and 0x0f, 16))
+    private fun IntToHex2(i: Byte): String {
+        val j = i.toInt()
+        val hex_2 = charArrayOf(Character.forDigit(j shr 4 and 0x0f, 16), Character.forDigit(j and 0x0f, 16))
         val hex_2_str = String(hex_2)
         return hex_2_str.toUpperCase()
     }

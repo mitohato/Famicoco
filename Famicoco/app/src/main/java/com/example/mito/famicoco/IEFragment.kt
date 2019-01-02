@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,16 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-
+import androidx.fragment.app.Fragment
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
+import com.example.mito.famicoco.MainActivity.Companion.myName
+import com.example.mito.famicoco.MainActivity.Companion.selectIcon_map
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
 import java.io.IOException
-import java.io.InputStream
 import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -30,18 +32,10 @@ import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
 
-import butterknife.BindView
-import butterknife.ButterKnife
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
-import com.example.mito.famicoco.MainActivity.myName
-import com.example.mito.famicoco.MainActivity.selectIcon_map
-
 class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener {      //いえここ用のフラグメント
     private var adapter: TalkCustomAdapter? = null
     private var mTimer: Timer? = null
     private var mHandler: Handler? = null
-    private var item: CustomData? = null
     private var list: ArrayList<CustomData>? = null
     private val ie_list: ArrayList<Any>
 
@@ -184,7 +178,7 @@ class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener {      
         //いえここの送るボタンに機能を設定
         button!!.setOnClickListener {
             var str = editText!!.text.toString()
-            item = CustomData()
+            val item = CustomData()
             adapter = TalkCustomAdapter(context, 0, list)
 
             if (str != "") {
@@ -203,15 +197,15 @@ class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener {      
                     e.printStackTrace()
                 }
 
-                item!!.comment = text
-                item!!.name = myName
-                item!!.setTime()
-                list!!.add(item)
+                item.comment = text
+                item.name = myName
+                item.setTime()
+                list?.add(item)
                 editText!!.setText("")
                 ie_listView!!.adapter = adapter
                 onKeyboardAppeared()
             }
-            KeyboardUtils.hide(activity)
+            activity?.let { it -> KeyboardUtils.hide(it) }
         }
     }
 

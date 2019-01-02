@@ -5,19 +5,19 @@ import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.SimpleAdapter
-
+import androidx.fragment.app.Fragment
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
 import org.json.JSONArray
 import org.json.JSONException
-
 import java.io.IOException
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
@@ -25,11 +25,6 @@ import java.util.ArrayList
 import java.util.HashMap
 import java.util.Timer
 import java.util.TimerTask
-
-import butterknife.BindView
-import butterknife.ButterKnife
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
 
 class SOTOFragment : Fragment() {     //そとここ用のクラス
     @BindView(R.id.soto_listview)

@@ -4,30 +4,25 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
+import com.example.mito.famicoco.MainActivity.Companion.tlIcon
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
 import java.io.IOException
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
-
-import butterknife.BindView
-import butterknife.ButterKnife
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
-import com.example.mito.famicoco.MainActivity.tlIcon
 
 class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {      //タイムライン用のフラグメント
 
@@ -48,9 +43,9 @@ class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {      //タ
         val v = inflater.inflate(R.layout.fragment_tl, container, false)
         ButterKnife.bind(this, v)
 
-        swipeRefreshLayout!!.setColorSchemeResources(R.color.MainColorDark,
+        swipeRefreshLayout?.setColorSchemeResources(R.color.MainColorDark,
                 R.color.MainColor, R.color.MainColorDark, R.color.MainColor)
-        swipeRefreshLayout!!.setOnRefreshListener(this)
+        swipeRefreshLayout?.setOnRefreshListener(this)
         return v
     }
 
@@ -105,13 +100,13 @@ class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {      //タ
             }
 
             override fun onPostExecute(tlUpdateItemArrayList: ArrayList<TLUpdateItem>) {
-                list!!.clear()
+                list?.clear()
                 adapter = CustomAdapter(context, 0, list)
                 val m = tlUpdateItemArrayList.size
                 for (i in 0 until m) {
                     val tlUpdateItem = tlUpdateItemArrayList[i]
-                    list!!.add(0, tlUpdateItem.toCustomData())
-                    listView!!.adapter = adapter
+                    list?.add(0, tlUpdateItem.toCustomData())
+                    listView?.adapter = adapter
                 }
                 Log.d("hoge", "here")
             }
@@ -137,7 +132,7 @@ internal class TLUpdateItem @Throws(JSONException::class)
 constructor(`object`: JSONObject) {
     private val text: String
     private val time: String
-    private val icon: Bitmap
+    private val icon: Bitmap?
 
     init {
         this.time = `object`.getString("time")

@@ -3,29 +3,24 @@ package com.example.mito.famicoco
 import android.annotation.SuppressLint
 import android.os.AsyncTask
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
-
+import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
+import com.example.mito.famicoco.MainActivity.Companion.tlIcon
 import org.json.JSONArray
 import org.json.JSONException
-
 import java.io.IOException
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
-
-import butterknife.BindView
-import butterknife.ButterKnife
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
-import com.example.mito.famicoco.MainActivity.tlIcon
 
 class PETFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 

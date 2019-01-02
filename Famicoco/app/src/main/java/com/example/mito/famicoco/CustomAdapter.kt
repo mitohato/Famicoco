@@ -10,11 +10,11 @@ import android.widget.TextView
 
 import java.util.ArrayList
 
-internal class CustomAdapter(c: Context, id: Int, list: ArrayList<CustomData>) : ArrayAdapter<CustomData>(c, id, list) {  //リストに表示するためのadapterを用意するクラス
+internal class CustomAdapter(c: Context?, id: Int, list: ArrayList<CustomData>?) : ArrayAdapter<CustomData>(c, id, list) {  //リストに表示するためのadapterを用意するクラス
     private val layoutInflater: LayoutInflater
 
     init {
-        this.layoutInflater = c.getSystemService(
+        this.layoutInflater = c?.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     }
 

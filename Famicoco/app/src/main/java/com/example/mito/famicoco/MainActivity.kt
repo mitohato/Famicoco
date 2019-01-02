@@ -1,28 +1,16 @@
 package com.example.mito.famicoco
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.BluetoothLeScanner
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
-import com.google.android.material.tabs.TabLayout
-import androidx.core.app.AppLaunchChecker
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -30,12 +18,25 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.AppLaunchChecker
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.IBeaconScanCallback.Companion.beaconId
+import com.example.mito.famicoco.IBeaconScanCallback.Companion.f_init
+import com.google.android.material.tabs.TabLayout
+import okhttp3.FormBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONException
-
 import java.io.IOException
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
@@ -43,20 +44,10 @@ import java.util.HashMap
 import java.util.Timer
 import java.util.TimerTask
 
-import butterknife.BindView
-import butterknife.ButterKnife
-import okhttp3.FormBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
-
-import com.example.mito.famicoco.IBeaconScanCallback.beaconId
-import com.example.mito.famicoco.IBeaconScanCallback.f_init
-
 class MainActivity : AppCompatActivity() {
 
-    internal var mBluetoothLeScanner: BluetoothLeScanner
-    internal var mScanCallback: IBeaconScanCallback
+    internal lateinit var mBluetoothLeScanner: BluetoothLeScanner
+    internal lateinit var mScanCallback: IBeaconScanCallback
     private var mHandler: Handler? = null
 
     @BindView(R.id.tabs)

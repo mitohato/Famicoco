@@ -1,11 +1,9 @@
 package com.example.mito.famicoco
 
 import android.util.Log
-
+import com.example.mito.famicoco.MainActivity.Companion.myRegistrationId
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
-
-import com.example.mito.famicoco.MainActivity.myRegistrationId
 
 
 class MyFireBaseInstanceIDService : FirebaseInstanceIdService() {

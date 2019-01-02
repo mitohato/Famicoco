@@ -67,12 +67,9 @@ internal class HttpGetTask : AsyncTask<URL, Void, Boolean>() {
         @Throws(IOException::class)
         fun readInputStream(`in`: InputStream): String {
             val sb = StringBuilder()
-            var st: String
 
             val br = BufferedReader(InputStreamReader(`in`, "UTF-8"))
-            while ((st = br.readLine()) != null) {
-                sb.append(st)
-            }
+                sb.append(br.readLine())
             try {
                 `in`.close()
             } catch (e: Exception) {

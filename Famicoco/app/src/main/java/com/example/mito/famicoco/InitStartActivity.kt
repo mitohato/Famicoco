@@ -1,33 +1,27 @@
 package com.example.mito.famicoco
 
-import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.KeyEvent
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
+import butterknife.BindView
+import butterknife.ButterKnife
+import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
+import com.example.mito.famicoco.MainActivity.Companion.myBeaconMacAddress
+import com.example.mito.famicoco.MainActivity.Companion.myName
+import com.example.mito.famicoco.MainActivity.Companion.myRegistrationId
 import java.io.UnsupportedEncodingException
 import java.net.MalformedURLException
 import java.net.URL
 import java.net.URLEncoder
 import java.util.Timer
 import java.util.TimerTask
-
-import butterknife.BindView
-import butterknife.ButterKnife
-
-import com.example.mito.famicoco.MainActivity.ServerUrl
-import com.example.mito.famicoco.MainActivity.myBeaconMacAddress
-import com.example.mito.famicoco.MainActivity.myName
-import com.example.mito.famicoco.MainActivity.myRegistrationId
 
 class InitStartActivity : AppCompatActivity() {
     @BindView(R.id.name_init_setting)
