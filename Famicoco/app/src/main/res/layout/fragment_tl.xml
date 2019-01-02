@@ -8,7 +8,7 @@
     android:paddingBottom="8dp"
     tools:context="com.example.mito.famicoco.TLFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,5 +23,5 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="45dp"
         android:id="@+id/list"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

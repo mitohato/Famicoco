@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -103,7 +103,7 @@ public class SOTOTalkActivity extends AppCompatActivity implements CustomListVie
         }
 
         //戻るボタン表示
-        android.support.v7.app.ActionBar actionbar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionbar = getSupportActionBar();
         assert actionbar != null;
         actionbar.setHomeButtonEnabled(true);
         actionbar.setDisplayHomeAsUpEnabled(true);
