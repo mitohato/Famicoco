@@ -1,16 +1,14 @@
-package com.example.mito.famicoco;
+package com.example.mito.famicoco
 
-import android.util.Log;
+import android.util.Log
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.FirebaseInstanceIdService
 
-import static com.example.mito.famicoco.MainActivity.myRegistrationId;
+import com.example.mito.famicoco.MainActivity.myRegistrationId
 
 
-public class MyFireBaseInstanceIDService extends FirebaseInstanceIdService {
-
-    private static final String TAG = "MyFirebaseIDService";
+class MyFireBaseInstanceIDService : FirebaseInstanceIdService() {
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of
@@ -19,17 +17,16 @@ public class MyFireBaseInstanceIDService extends FirebaseInstanceIdService {
      */
     // [START refresh_token]
     /* レジストレーションIDの取得 */
-    @Override
-    public void onTokenRefresh() {
+    override fun onTokenRefresh() {
         // Get updated InstanceID token.
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "Refreshed token: " + refreshedToken);
-        myRegistrationId = refreshedToken;
+        val refreshedToken = FirebaseInstanceId.getInstance().token
+        Log.d(TAG, "Refreshed token: " + refreshedToken!!)
+        myRegistrationId = refreshedToken
 
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
-        sendRegistrationToServer();
+        sendRegistrationToServer()
     }
     // [END refresh_token]
 
@@ -40,8 +37,13 @@ public class MyFireBaseInstanceIDService extends FirebaseInstanceIdService {
      * maintained by your application.
      *
      */
-    private void sendRegistrationToServer() {
+    private fun sendRegistrationToServer() {
         // TODO: Implement this method to send token to your app server.
 
+    }
+
+    companion object {
+
+        private val TAG = "MyFirebaseIDService"
     }
 }
