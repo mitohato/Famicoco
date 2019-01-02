@@ -3,13 +3,11 @@ package com.example.mito.famicoco;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.mito.famicoco.MainActivity.myBeaconMacAddress;
-import static com.google.android.gms.internal.zzs.TAG;
 
 class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時に呼ばれる
 
@@ -42,8 +40,6 @@ class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時
                 myBeaconMacAddress = getMinor(recordByte);
             }
             beaconId.add(getMinor(recordByte));
-            Log.d(TAG, getUUID(recordByte));
-            Log.d(TAG, getMinor(recordByte));
         }
     }
 
@@ -70,7 +66,6 @@ class IBeaconScanCallback extends ScanCallback {      //beaconを検知した時
                 errorMessage = "内部エラーが発生しました";
                 break;
         }
-        Log.d(TAG, errorMessage);
     }
 
     private String getUUID(byte[] scanRecord) {
