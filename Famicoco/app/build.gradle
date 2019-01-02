@@ -6,12 +6,11 @@ tasks.withType(AbstractCompile) each { it.options.encoding = defaultEncoding }
 
 android {
     useLibrary 'org.apache.http.legacy'
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.mito.famicoco2"
         minSdkVersion 22
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -36,11 +35,11 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation files('libs/socketio.jar')
-    implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:design:27.0.2'
-    implementation 'com.android.support:support-v4:27.0.2'
-    implementation 'com.google.firebase:firebase-messaging:11.8.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.jakewharton:butterknife:8.4.0'
 }
