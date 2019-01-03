@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,52 +17,66 @@ import com.example.mito.famicoco.MainActivity.Companion.tlIcon
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
 
-class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {      //タイムライン用のフラグメント
-
-    private var adapter: CustomAdapter? = null
-    private var list: ArrayList<CustomData>? = null
-
+class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener { // タイムライン用のフラグメント
+    
+    private lateinit var adapter: CustomAdapter
+    private lateinit var list: ArrayList<CustomData>
+    
     @BindView(R.id.list)
-    internal var listView: ListView? = null
+    internal lateinit var listView: ListView
     @BindView(R.id.swipe_tl)
-    internal var swipeRefreshLayout: SwipeRefreshLayout? = null
-
-    override fun onCreate(saveInterfaceState: Bundle?) {
-        super.onCreate(saveInterfaceState)
+    internal lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(
+                R.layout.fragment_tl,
+                container,
+                false
+        )
+        ButterKnife.bind(
+                this,
+                view
+        )
+        
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.MainColorDark,
+                R.color.MainColor,
+                R.color.MainColorDark,
+                R.color.MainColor
+        )
+        swipeRefreshLayout.setOnRefreshListener(this)
+        return view
     }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_tl, container, false)
-        ButterKnife.bind(this, v)
-
-        swipeRefreshLayout?.setColorSchemeResources(R.color.MainColorDark,
-                R.color.MainColor, R.color.MainColorDark, R.color.MainColor)
-        swipeRefreshLayout?.setOnRefreshListener(this)
-        return v
-    }
-
+    
     override fun onResume() {
         super.onResume()
-        UpData()
+        update()
     }
-
+    
     override fun onActivityCreated(bundle: Bundle?) {
         super.onActivityCreated(bundle)
         setHasOptionsMenu(true)
-
+        
         list = ArrayList()
-        adapter = CustomAdapter(context, 0, list)
+        adapter = CustomAdapter(
+                context,
+                0,
+                list
+        )
     }
-
-    fun UpData() {
-        @SuppressLint("StaticFieldLeak") val task = object : AsyncTask<URL, Void, ArrayList<TLUpdateItem>>() {
+    
+    private fun update() {
+        @SuppressLint("StaticFieldLeak")
+        val task = object : AsyncTask<URL, Void, ArrayList<TLUpdateItem>>() {
             override fun doInBackground(vararg values: URL): ArrayList<TLUpdateItem> {
                 var con: HttpURLConnection? = null
                 var item: TLUpdateItem
@@ -78,73 +91,72 @@ class TLFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {      //タ
                     con.connect()
                     val `in` = con.inputStream
                     val readSt = HttpGetTask.readInputStream(`in`)
-                    Log.d("readString", readSt)
-
-                    //// 配列を取得する場合
+                    
+                    // // 配列を取得する場合
                     val jsonArray = JSONArray(readSt)
-
+                    
                     val m = jsonArray.length()
                     for (i in 0 until m) {
                         val data = jsonArray.getJSONObject(i)
                         item = TLUpdateItem(data)
                         tlUpdateItems.add(item)
                     }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                } catch (e: IOException) {
+                } catch (e: Exception) {
                     e.printStackTrace()
                 } finally {
                     con?.disconnect()
                 }
                 return tlUpdateItems
             }
-
+            
             override fun onPostExecute(tlUpdateItemArrayList: ArrayList<TLUpdateItem>) {
-                list?.clear()
-                adapter = CustomAdapter(context, 0, list)
+                list.clear()
+                adapter = CustomAdapter(
+                        context,
+                        0,
+                        list
+                )
                 val m = tlUpdateItemArrayList.size
                 for (i in 0 until m) {
                     val tlUpdateItem = tlUpdateItemArrayList[i]
-                    list?.add(0, tlUpdateItem.toCustomData())
-                    listView?.adapter = adapter
+                    list.add(
+                            0,
+                            tlUpdateItem.toCustomData()
+                    )
+                    listView.adapter = adapter
                 }
-                Log.d("hoge", "here")
             }
         }
-
+        
         try {
             val url = URL(ServerUrl + "get_tl/")
             task.execute(url)
         } catch (e: MalformedURLException) {
             e.printStackTrace()
         }
-
     }
-
+    
     override fun onRefresh() {
-        Log.d("Refresh", "screen")
-        UpData()
-        swipeRefreshLayout!!.isRefreshing = false
+        update()
+        swipeRefreshLayout.isRefreshing = false
     }
 }
 
 internal class TLUpdateItem @Throws(JSONException::class)
 constructor(`object`: JSONObject) {
-    private val text: String
-    private val time: String
-    private val icon: Bitmap?
-
+    private val text: String = `object`.getString("action")
+    private val time: String = `object`.getString("time")
+    private val icon: Bitmap
+    
     init {
-        this.time = `object`.getString("time")
-        this.text = `object`.getString("action")
         val type = `object`.getString("action_num")
         this.icon = tlIcon[type[0] - '0']
     }
-
+    
     fun toCustomData(): CustomData {
         val customData = CustomData()
         customData.comment = this.text
-        customData.setTime(this.time)
+        customData.timeNow = this.time
         customData.icon = this.icon
         return customData
     }

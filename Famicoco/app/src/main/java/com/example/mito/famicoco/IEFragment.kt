@@ -18,11 +18,10 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import com.example.mito.famicoco.MainActivity.Companion.ServerUrl
 import com.example.mito.famicoco.MainActivity.Companion.myName
-import com.example.mito.famicoco.MainActivity.Companion.selectIcon_map
+import com.example.mito.famicoco.MainActivity.Companion.selectIconMap
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
 import java.io.UnsupportedEncodingException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -32,160 +31,195 @@ import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
 
-class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener {      //いえここ用のフラグメント
+class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener { // いえここ用のフラグメント
     private var adapter: TalkCustomAdapter? = null
     private var mTimer: Timer? = null
     private var mHandler: Handler? = null
-    private var list: ArrayList<CustomData>? = null
-    private val ie_list: ArrayList<Any>
-
-
+    private var list: ArrayList<CustomData> = ArrayList()
+    private val ieList: ArrayList<Any> = ArrayList()
+    
     @BindView(R.id.ie_listView)
-    internal var ie_listView: CustomListView? = null
+    internal lateinit var ieListView: CustomListView
     @BindView(R.id.editText)
-    internal var editText: EditText? = null
+    internal lateinit var editText: EditText
     @BindView(R.id.button)
-    internal var button: Button? = null
+    internal lateinit var button: Button
     @BindView(R.id.ie_imageView)
-    internal var imageView1: ImageView? = null
+    internal lateinit var imageView1: ImageView
     @BindView(R.id.ie_imageView2)
-    internal var imageView2: ImageView? = null
+    internal lateinit var imageView2: ImageView
     @BindView(R.id.ie_imageView3)
-    internal var imageView3: ImageView? = null
+    internal lateinit var imageView3: ImageView
     @BindView(R.id.ie_imageView4)
-    internal var imageView4: ImageView? = null
+    internal lateinit var imageView4: ImageView
     @BindView(R.id.ie_imageView5)
-    internal var imageView5: ImageView? = null
+    internal lateinit var imageView5: ImageView
     @BindView(R.id.ie_imageView6)
-    internal var imageView6: ImageView? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_ie, container, false)
-        ButterKnife.bind(this, v)
-        ie_listView!!.setListener(this)
-        return v
+    internal lateinit var imageView6: ImageView
+    
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(
+                R.layout.fragment_ie,
+                container,
+                false
+        )
+        ButterKnife.bind(
+                this,
+                view
+        )
+        ieListView.setListener(this)
+        return view
     }
-
+    
     override fun onResume() {
         super.onResume()
         mHandler = Handler()
         mTimer = Timer()
-        mTimer!!.schedule(object : TimerTask() {
-            override fun run() {
-                mHandler!!.post {
-                    // 実行したい処理
-                    @SuppressLint("StaticFieldLeak") val task = object : AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
-                        override fun doInBackground(vararg urls: URL): ArrayList<UpdateItem> {
-
-                            val con: HttpURLConnection
-                            val readSt: String
-
-                            var updateItem: UpdateItem
-                            val updateItemList = ArrayList<UpdateItem>()
+        mTimer?.schedule(
+                object : TimerTask() {
+                    override fun run() {
+                        mHandler?.post {
+                            // 実行したい処理
+                            @SuppressLint("StaticFieldLeak")
+                            val task = object : AsyncTask<URL, Void, ArrayList<UpdateItem>>() {
+                                override fun doInBackground(vararg urls: URL): ArrayList<UpdateItem> {
+                                    
+                                    val con: HttpURLConnection
+                                    val readSt: String
+                                    
+                                    var updateItem: UpdateItem
+                                    val updateItemList = ArrayList<UpdateItem>()
+                                    try {
+                                        val url = urls[0]
+                                        con = url.openConnection() as HttpURLConnection
+                                        con.doInput = true
+                                        con.connect()
+                                        
+                                        val `in` = con.inputStream
+                                        readSt = HttpGetTask.readInputStream(`in`)
+                                        
+                                        val data = JSONArray(readSt)
+                                        val member = data.getJSONArray(0)
+                                        ieList.clear()
+                                        var m = member.length()
+                                        for (i in 0 until m) {
+                                            ieList.add(member.get(i))
+                                        }
+                                        
+                                        val talks = data.getJSONArray(1)
+                                        m = talks.length()
+                                        for (i in 0 until m) {
+                                            val talk = talks.getJSONObject(i)
+                                            updateItem = UpdateItem(talk)
+                                            updateItemList.add(updateItem)
+                                        }
+                                    } catch (e: Exception) {
+                                        e.printStackTrace()
+                                    }
+                                    
+                                    return updateItemList
+                                }
+                                
+                                override fun onPostExecute(updateItemArrayList: ArrayList<UpdateItem>) {
+                                    var m = ieList.size
+                                    imageView1.setImageResource(R.color.SubColor)
+                                    imageView2.setImageResource(R.color.SubColor)
+                                    imageView3.setImageResource(R.color.SubColor)
+                                    imageView4.setImageResource(R.color.SubColor)
+                                    imageView5.setImageResource(R.color.SubColor)
+                                    imageView6.setImageResource(R.color.SubColor)
+                                    for (i in 0 until m) {
+                                        when (i) {
+                                            0 -> imageView1.setImageBitmap(judge(ieList[0]))
+                                            1 -> imageView2.setImageBitmap(judge(ieList[1]))
+                                            2 -> imageView3.setImageBitmap(judge(ieList[2]))
+                                            3 -> imageView4.setImageBitmap(judge(ieList[3]))
+                                            4 -> imageView5.setImageBitmap(judge(ieList[4]))
+                                            5 -> imageView6.setImageBitmap(judge(ieList[5]))
+                                        }
+                                    }
+                                    if (list.size != updateItemArrayList.size) {
+                                        list.clear()
+                                        adapter = TalkCustomAdapter(context, 0, list)
+                                        m = updateItemArrayList.size
+                                        for (i in 0 until m) {
+                                            val updateItem = updateItemArrayList[i]
+                                            list.add(0, updateItem.toCustomData())
+                                            ieListView.adapter = adapter
+                                        }
+                                        onKeyboardAppeared()
+                                    }
+                                }
+                            }
                             try {
-                                val url = urls[0]
-                                con = url.openConnection() as HttpURLConnection
-                                con.doInput = true
-                                con.connect()
-                                val `in` = con.inputStream
-                                readSt = HttpGetTask.readInputStream(`in`)
-                                val data = JSONArray(readSt)
-                                val member = data.getJSONArray(0)
-                                ie_list.clear()
-                                var m = member.length()
-                                for (i in 0 until m) {
-                                    ie_list.add(member.get(i))
-                                }
-                                val talks = data.getJSONArray(1)
-                                m = talks.length()
-                                for (i in 0 until m) {
-                                    val talk = talks.getJSONObject(i)
-                                    updateItem = UpdateItem(talk)
-                                    updateItemList.add(updateItem)
-                                }
-                            } catch (e: JSONException) {
+                                val url = URL(ServerUrl + "home/")
+                                task.execute(url)
+                            } catch (e: MalformedURLException) {
                                 e.printStackTrace()
-                            } catch (e: IOException) {
-                                e.printStackTrace()
-                            }
-
-                            return updateItemList
-                        }
-
-                        override fun onPostExecute(updateItemArrayList: ArrayList<UpdateItem>) {
-                            var m = ie_list.size
-                            imageView1!!.setImageResource(R.color.SubColor)
-                            imageView2!!.setImageResource(R.color.SubColor)
-                            imageView3!!.setImageResource(R.color.SubColor)
-                            imageView4!!.setImageResource(R.color.SubColor)
-                            imageView5!!.setImageResource(R.color.SubColor)
-                            imageView6!!.setImageResource(R.color.SubColor)
-                            for (i in 0 until m) {
-                                if (i == 0)
-                                    imageView1!!.setImageBitmap(judge(ie_list[0]))
-                                else if (i == 1)
-                                    imageView2!!.setImageBitmap(judge(ie_list[1]))
-                                else if (i == 2)
-                                    imageView3!!.setImageBitmap(judge(ie_list[2]))
-                                else if (i == 3)
-                                    imageView4!!.setImageBitmap(judge(ie_list[3]))
-                                else if (i == 4)
-                                    imageView5!!.setImageBitmap(judge(ie_list[4]))
-                                else if (i == 5)
-                                    imageView6!!.setImageBitmap(judge(ie_list[5]))
-                            }
-                            if (list!!.size != updateItemArrayList.size) {
-                                list!!.clear()
-                                adapter = TalkCustomAdapter(context, 0, list)
-                                m = updateItemArrayList.size
-                                for (i in 0 until m) {
-                                    val updateItem = updateItemArrayList[i]
-                                    list!!.add(0, updateItem.toCustomData())
-                                    ie_listView!!.adapter = adapter
-                                }
-                                onKeyboardAppeared()
                             }
                         }
                     }
-                    try {
-                        val url = URL(ServerUrl + "home/")
-                        task.execute(url)
-
-                    } catch (e: MalformedURLException) {
-                        e.printStackTrace()
-                    }
-                }
-            }
-        }, 5000, 5000) // 実行したい間隔(ミリ秒)
+                },
+                5000,
+                5000
+        ) // 実行したい間隔(ミリ秒)
     }
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        icon[0] = BitmapFactory.decodeResource(resources, R.drawable.haruka)
-        icon[1] = BitmapFactory.decodeResource(resources, R.drawable.riku)
-        icon[2] = BitmapFactory.decodeResource(resources, R.drawable.mother)
-        icon[3] = BitmapFactory.decodeResource(resources, R.drawable.father)
-        icon[4] = BitmapFactory.decodeResource(resources, R.drawable.grandfather)
+        icon[0] = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.haruka
+        )
+        icon[1] = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.riku
+        )
+        icon[2] = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.mother
+        )
+        icon[3] = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.father
+        )
+        icon[4] = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.grandfather
+        )
     }
-
+    
     override fun onActivityCreated(bundle: Bundle?) {
         super.onActivityCreated(bundle)
         setHasOptionsMenu(true)
-
+        
         list = ArrayList()
-
-        //いえここの送るボタンに機能を設定
-        button!!.setOnClickListener {
-            var str = editText!!.text.toString()
+        
+        // いえここの送るボタンに機能を設定
+        button.setOnClickListener {
+            var str = editText.text.toString()
             val item = CustomData()
-            adapter = TalkCustomAdapter(context, 0, list)
-
+            adapter = TalkCustomAdapter(
+                    context,
+                    0,
+                    list
+            )
+            
             if (str != "") {
                 val text = str
                 try {
-                    str = URLEncoder.encode(str, "UTF-8")
-                    val name = URLEncoder.encode(myName, "UTF-8")
+                    str = URLEncoder.encode(
+                            str,
+                            "UTF-8"
+                    )
+                    val name = URLEncoder.encode(
+                            myName,
+                            "UTF-8"
+                    )
                     val urlString = ServerUrl + "home/talk/?name=" + name + "&text=" + str
                     val url = URL(urlString)
                     HttpGetTask().execute(url)
@@ -196,73 +230,60 @@ class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener {      
                     Toast.makeText(context, "Encoding failed", Toast.LENGTH_SHORT).show()
                     e.printStackTrace()
                 }
-
+                
                 item.comment = text
                 item.name = myName
                 item.setTime()
-                list?.add(item)
-                editText!!.setText("")
-                ie_listView!!.adapter = adapter
+                list.add(item)
+                editText.setText("")
+                ieListView.adapter = adapter
                 onKeyboardAppeared()
             }
-            activity?.let { it -> KeyboardUtils.hide(it) }
+            activity?.let { activity -> KeyboardUtils.hide(activity) }
         }
     }
-
+    
     override fun onStop() {
         super.onStop()
         if (mTimer != null) {
-            mTimer!!.cancel()
+            mTimer?.cancel()
             mTimer = null
         }
     }
-
-    init {
-        ie_list = ArrayList()
-    }
-
+    
     override fun onKeyboardAppeared() {
-
-        //ListView生成済、且つサイズ変更した（キーボードが出現した）場合
+        
+        // ListView生成済、且つサイズ変更した（キーボードが出現した）場合
         //        if (isChange) {
-        //スクロールアニメーションが要らない場合はこれでOK
-        ie_listView!!.setSelection(ie_listView!!.count - 1)
+        // スクロールアニメーションが要らない場合はこれでOK
+        ieListView.setSelection(ieListView.count - 1)
         //        }
     }
-
+    
     companion object {
-        var icon = arrayOfNulls<Bitmap>(6)
-
+        var icon = ArrayList<Bitmap>()
+        
         fun judge(s: Any): Bitmap? {
-            val bitmap: Bitmap?
-            if (s == "しゅり")
-                bitmap = icon[0]
-            else if (s == "しゅうき")
-                bitmap = icon[1]
-            else if (s == "おかあさん")
-                bitmap = icon[2]
-            else if (s == "おとうさん")
-                bitmap = icon[3]
-            else if (s == "かんじい")
-                bitmap = icon[4]
-            else
-                bitmap = selectIcon_map!![s]
-            return bitmap
+            return when (s) {
+                "しゅり" -> icon[0]
+                "しゅうき" -> icon[1]
+                "おかあさん" -> icon[2]
+                "おとうさん" -> icon[3]
+                "かんじい" -> icon[4]
+                else -> selectIconMap[s]
+            }
         }
     }
 }
 
 internal class UpdateItem @Throws(JSONException::class)
 constructor(json: JSONObject) {
-    private val name: String
-    private val comment: String
-    private val time: String
+    private val name: String = json.getString("name")
+    private val comment: String = json.getString("text")
+    private val time: String = json.getString("time")
     private var icon: Bitmap? = null
-
+    
     init {
-        this.name = json.getString("name")
-        this.comment = json.getString("text")
-        this.time = json.getString("time")
         when (name) {
             "しゅり" -> this.icon = IEFragment.icon[0]
             "しゅうき" -> this.icon = IEFragment.icon[1]
@@ -272,14 +293,16 @@ constructor(json: JSONObject) {
             else -> this.icon = IEFragment.icon[5]
         }
     }
-
+    
     fun toCustomData(): CustomData {
         val customData = CustomData()
-        customData.setTime(this.time)
-        customData.comment = this.comment
-        customData.name = this.name
-        // ここにif文を書く
-        customData.icon = this.icon
+        customData.also {
+            it.timeNow = this.time
+            it.comment = this.comment
+            it.name = this.name
+            // ここにif文を書く
+            it.icon = this.icon
+        }
         return customData
     }
 }

@@ -5,9 +5,8 @@ import com.example.mito.famicoco.MainActivity.Companion.myRegistrationId
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.iid.FirebaseInstanceIdService
 
-
 class MyFireBaseInstanceIDService : FirebaseInstanceIdService() {
-
+    
     /**
      * Called if InstanceID token is updated. This may occur if the security of
      * the previous token had been compromised. Note that this is called when the InstanceID token
@@ -20,14 +19,14 @@ class MyFireBaseInstanceIDService : FirebaseInstanceIdService() {
         val refreshedToken = FirebaseInstanceId.getInstance().token
         Log.d(TAG, "Refreshed token: " + refreshedToken!!)
         myRegistrationId = refreshedToken
-
+        
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer()
     }
     // [END refresh_token]
-
+    
     /**
      * Persist token to third-party servers.
      *
@@ -37,11 +36,10 @@ class MyFireBaseInstanceIDService : FirebaseInstanceIdService() {
      */
     private fun sendRegistrationToServer() {
         // TODO: Implement this method to send token to your app server.
-
     }
-
+    
     companion object {
-
-        private val TAG = "MyFirebaseIDService"
+        
+        private const val TAG = "MyFirebaseIDService"
     }
 }
