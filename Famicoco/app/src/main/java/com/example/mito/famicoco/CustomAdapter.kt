@@ -14,7 +14,11 @@ internal class CustomAdapter(
         c: Context?,
         id: Int,
         list: ArrayList<CustomData>?
-) : ArrayAdapter<CustomData>(c, id, list) { // リストに表示するためのadapterを用意するクラス
+) : ArrayAdapter<CustomData>(
+        c,
+        id,
+        list
+) { // リストに表示するためのadapterを用意するクラス
     private val layoutInflater: LayoutInflater = c?.getSystemService(
             Context.LAYOUT_INFLATER_SERVICE
     ) as LayoutInflater
