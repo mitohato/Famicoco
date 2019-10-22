@@ -348,9 +348,9 @@ class MainActivity : AppCompatActivity() {
             // Return a PlaceholderFragment (defined as a static inner class below).
             when (position) {
                 0 -> return TLFragment()
-                1 -> return IEFragment()
-                2 -> return SOTOFragment()
-                3 -> return PETFragment()
+                1 -> return IeFragment()
+                2 -> return SotoFragment()
+                3 -> return PetFragment()
             }
             return null
         }

@@ -7,7 +7,7 @@
     android:background="@color/White"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="com.example.mito.famicoco.IEFragment">
+    tools:context="com.example.mito.famicoco.IeFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

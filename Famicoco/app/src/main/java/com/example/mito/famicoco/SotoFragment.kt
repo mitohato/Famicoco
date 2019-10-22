@@ -25,7 +25,7 @@ import java.util.HashMap
 import java.util.Timer
 import java.util.TimerTask
 
-class SOTOFragment : Fragment() { // そとここ用のクラス
+class SotoFragment : Fragment() { // そとここ用のクラス
     @BindView(R.id.soto_listview)
     internal lateinit var sotoListView: ListView
     
@@ -87,7 +87,7 @@ class SOTOFragment : Fragment() { // そとここ用のクラス
         sotoListView.onItemClickListener = AdapterView.OnItemClickListener { _, _, pos, _ ->
             val intent = Intent(
                     activity,
-                    SOTOTalkActivity::class.java
+                    SotoTalkActivity::class.java
             )
             intent.putExtra(
                     "list",

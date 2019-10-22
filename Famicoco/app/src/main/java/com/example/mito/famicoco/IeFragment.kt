@@ -31,7 +31,7 @@ import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
 
-class IEFragment : Fragment(), CustomListView.OnKeyboardAppearedListener { // いえここ用のフラグメント
+class IeFragment : Fragment(), CustomListView.OnKeyboardAppearedListener { // いえここ用のフラグメント
     private var adapter: TalkCustomAdapter? = null
     private var mTimer: Timer? = null
     private var mHandler: Handler? = null
@@ -285,12 +285,12 @@ constructor(json: JSONObject) {
     
     init {
         when (name) {
-            "しゅり" -> this.icon = IEFragment.icon[0]
-            "しゅうき" -> this.icon = IEFragment.icon[1]
-            "お母さん" -> this.icon = IEFragment.icon[2]
-            "お父さん" -> this.icon = IEFragment.icon[3]
-            "かん爺" -> this.icon = IEFragment.icon[4]
-            else -> this.icon = IEFragment.icon[5]
+            "しゅり" -> this.icon = IeFragment.icon[0]
+            "しゅうき" -> this.icon = IeFragment.icon[1]
+            "お母さん" -> this.icon = IeFragment.icon[2]
+            "お父さん" -> this.icon = IeFragment.icon[3]
+            "かん爺" -> this.icon = IeFragment.icon[4]
+            else -> this.icon = IeFragment.icon[5]
         }
     }
     
