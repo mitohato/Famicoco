@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    tools:context="com.example.mito.famicoco.SOTOFragment"
+    tools:context="com.example.mito.famicoco.SotoFragment"
     android:id="@+id/sotococo_fragment">
 
     <!-- TODO: Update blank fragment layout -->

@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.mito.famicoco.SOTOTalkActivity"
+            android:name="com.example.mito.famicoco.SotoTalkActivity"
             android:screenOrientation="portrait" />
 
         <!-- [START firebase_service] -->

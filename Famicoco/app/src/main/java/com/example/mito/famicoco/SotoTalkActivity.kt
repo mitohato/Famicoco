@@ -26,7 +26,7 @@ import java.util.ArrayList
 import java.util.Timer
 import java.util.TimerTask
 
-class SOTOTalkActivity : AppCompatActivity(), CustomListView.OnKeyboardAppearedListener { // そとここのリストを押したときに呼ばれるトーク画面用Activity
+class SotoTalkActivity : AppCompatActivity(), CustomListView.OnKeyboardAppearedListener { // そとここのリストを押したときに呼ばれるトーク画面用Activity
     
     @BindView(R.id.soto_talk_listview)
     internal lateinit var listView: CustomListView
@@ -81,13 +81,13 @@ class SOTOTalkActivity : AppCompatActivity(), CustomListView.OnKeyboardAppearedL
             for (j in 0 until m) {
                 select.get(j)
                 when (j) {
-                    0 -> imageView1.setImageBitmap(IEFragment.judge(select.get(0)))
-                    1 -> imageView2.setImageBitmap(IEFragment.judge(select.get(1)))
-                    2 -> imageView3.setImageBitmap(IEFragment.judge(select.get(2)))
-                    3 -> imageView4.setImageBitmap(IEFragment.judge(select.get(3)))
-                    4 -> imageView5.setImageBitmap(IEFragment.judge(select.get(4)))
-                    5 -> imageView5.setImageBitmap(IEFragment.judge(select.get(5)))
-                    else -> imageView6.setImageBitmap(IEFragment.judge(select.get(6)))
+                    0 -> imageView1.setImageBitmap(IeFragment.judge(select.get(0)))
+                    1 -> imageView2.setImageBitmap(IeFragment.judge(select.get(1)))
+                    2 -> imageView3.setImageBitmap(IeFragment.judge(select.get(2)))
+                    3 -> imageView4.setImageBitmap(IeFragment.judge(select.get(3)))
+                    4 -> imageView5.setImageBitmap(IeFragment.judge(select.get(4)))
+                    5 -> imageView5.setImageBitmap(IeFragment.judge(select.get(5)))
+                    else -> imageView6.setImageBitmap(IeFragment.judge(select.get(6)))
                 }
             }
         } catch (e: JSONException) {

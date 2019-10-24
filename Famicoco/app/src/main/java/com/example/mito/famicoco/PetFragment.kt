@@ -20,7 +20,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
 
-class PETFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+class PetFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     
     private lateinit var adapter: CustomAdapter
     

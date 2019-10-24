@@ -39,11 +39,11 @@ dependencies {
     //noinspection GradleCompatible
     implementation files('libs/socketio.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.jakewharton:butterknife:8.4.0'
 }
